@@ -1,0 +1,277 @@
+[colors]
+background = ${xrdb:background:#000}
+background-alt = ${xrdb:color8:#000}
+background-trans = #DD272822
+;background-trans = #5a000000
+foreground = ${xrdb:foreground:#fff}
+black = ${xrdb:color0:#000}
+black-alt = ${xrdb:color1:#000}
+red = ${xrdb:color1:#f00}
+red-alt = ${xrdb:color9:#f00}
+green = ${xrdb:color2:#0f0}
+green-alt = ${xrdb:color10:#0f0}
+yellow = ${xrdb:color3:#f0f}
+yellow-alt = ${xrdb:color12:#f0f}
+magenta = ${xrdb:color5:#f00}
+magenta-alt = ${xrdb:color13:#f00}
+cyan = ${xrdb:color6:#00f}
+cyan-alt = ${xrdb:color14:#00f}
+white = ${xrdb:color7:#00f}
+white-alt = ${xrdb:color15:#00f}
+white-real = #fff
+
+
+
+[bar/rootkit]
+monitor = eDP1
+locale = de_DE.UTF-8
+width = 100%
+height = 35
+
+spacing = 1
+padding-right = 0
+padding-left = 0
+module-margin-left = 0
+module-margin-right = 0
+
+; tray-position = right
+; wm-restack = i3
+; override-redirect = true
+
+; tray-padding = 50
+;radius = 10.0
+
+; font-0 = Siji:pixelsize=10
+font-0 = Quicksand:antialias=true:size=14;3
+font-1 = Font Awesome 5 Pro:style=Solid:pixelsize=13;4
+font-2 = RobotoMono Nerd Font:antialias=true:size=16;4
+font-3 = Sauce Code Pro Nerd Font:antialias=true:size=13;3
+font-4 = Font Awesome 5 Pro:antialias=true:style=Regular:pixelsize=13;4
+
+background = ${colors.background-trans}
+foreground = ${colors.white-real}
+
+underline-size = 4
+
+;border-size = 14
+;border-color = #00000000
+line-size = 4
+modules-left = i3 keyboard
+modules-center = xwindow
+modules-right = xbacklight battery pulseaudio date powermenu
+
+cursor-click = pointer
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:50:...%
+label-font = 1
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+ 
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+ 
+label-mode-padding = 4
+label-mode-foreground = ${colors.foreground} 
+label-mode-background = ${colors.cyan}
+ 
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.background}
+label-focused-underline = ${colors.green}
+label-focused-padding = 4
+ 
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 4
+; label-unfocused-font = 4
+ 
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+ 
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.red}
+label-urgent-padding = 4
+ 
+; Separator in between workspaces
+; label-separator = |
+
+[module/xbacklight]
+type = internal/xbacklight
+
+format = <ramp> <label>
+label = %percentage%%
+label-font = 1
+ramp-font = 3
+format-padding = 3
+
+; label-padding-right = 2
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+[module/date]
+type = internal/date
+interval = 1.0
+
+date = %d.%m.
+time = %H:%M
+
+date-alt = %A, %d. %B %Y
+time-alt = %H:%M:%S
+
+format = <label>
+
+label = %{T2}%{T4} %time% %date%
+
+format-background = ${colors.background}
+format-padding = 3
+
+[module/pulseaudio]
+type = internal/pulseaudio
+interval = 5
+
+format-volume = <ramp-volume> <label-volume>
+format-volume-padding = 3
+format-muted-padding = 3
+
+label-muted = %{T2} %{T1}muted
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+
+
+[module/battery]
+type = internal/battery
+
+full-at = 99
+
+battery = BAT1
+adapter = ADP1
+
+poll-interval = 5
+
+ramp-capacity-font = 2
+
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+label-charging = %percentage%%
+label-discharging = %percentage%%
+label-full = %percentage%%
+format-charging-padding = 3
+format-discharging-padding = 3
+format-full-padding = 3
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+
+[module/keyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+blacklist-1 = 
+
+format = <label-indicator>
+label-indicator = %name%
+label-indicator-padding = 2
+label-indicator-background = ${colors.red}
+
+
+[module/powermenu]
+type = custom/menu
+expand-right = false
+
+label-open = 
+; label-open-background = ${colors.red}
+label-open-background = ${colors.background-trans}
+;label-open-foreground = #fff
+label-close = 
+label-close-background = ${colors.red}
+label-close-foreground = ${colors.foreground}
+label-open-padding = 3
+;label-open-padding-right = 2
+label-close-padding = 4
+; label-close-padding-right = 0
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-0-underline = ${colors.yellow}
+menu-0-0-background = ${colors.background-trans}
+menu-0-1 = shutdown
+menu-0-1-exec = menu-open-2
+menu-0-1-underline = ${colors.yellow}
+menu-0-1-background = ${colors.background-trans}
+menu-0-2 = logout
+menu-0-2-exec = menu-open-3
+menu-0-2-underline = ${colors.yellow}
+menu-0-2-background = ${colors.background-trans}
+menu-0-3 = lock
+menu-0-3-exec = menu-open-4
+menu-0-3-underline = ${colors.yellow}
+menu-0-3-background = ${colors.background-trans}
+menu-0-0-padding = 1
+menu-0-0-margin = 1
+menu-0-1-padding = 1
+menu-0-1-margin = 1
+menu-0-2-padding = 1
+menu-0-2-margin = 1
+menu-0-3-padding = 1
+menu-0-3-margin = 1
+
+menu-1-0 = reboot?  
+menu-1-0-exec = i3exit reboot
+menu-1-0-padding = 1
+menu-1-0-margin = 1
+menu-1-0-underline = ${colors.red}
+menu-1-0-background = ${colors.background-trans}
+
+menu-2-0 = shutdown?  
+menu-2-0-exec = i3exit shutdown
+menu-2-0-padding = 1
+menu-2-0-margin = 1
+menu-2-0-underline = ${colors.red}
+menu-2-0-background = ${colors.background-trans}
+
+menu-3-0 = logout?  
+menu-3-0-exec = i3exit logout
+menu-3-0-padding = 1
+menu-3-0-margin = 1
+menu-3-0-underline = ${colors.red}
+menu-3-0-background = ${colors.background-trans}
+
+menu-4-0 = lock?  
+menu-4-0-exec = blurlock
+menu-4-0-padding = 1
+menu-4-0-margin = 1
+menu-4-0-underline = ${colors.red}
+menu-4-0-background = ${colors.background-trans}
+
+; vim:ft=dosini
